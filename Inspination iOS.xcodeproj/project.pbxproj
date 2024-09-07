@@ -14,6 +14,11 @@
 		1BE59A422C8C4E640082557A /* Inspination_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE59A412C8C4E640082557A /* Inspination_iOSTests.swift */; };
 		1BE59A4C2C8C4E640082557A /* Inspination_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE59A4B2C8C4E640082557A /* Inspination_iOSUITests.swift */; };
 		1BE59A4E2C8C4E640082557A /* Inspination_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE59A4D2C8C4E640082557A /* Inspination_iOSUITestsLaunchTests.swift */; };
+		1BE59A5C2C8C4ED40082557A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE59A5B2C8C4ED30082557A /* HomeView.swift */; };
+		1BE59A5F2C8C60940082557A /* FetchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE59A5E2C8C60940082557A /* FetchController.swift */; };
+		1BE59A622C8C61BA0082557A /* PhotosResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE59A612C8C61BA0082557A /* PhotosResponse.swift */; };
+		1BE59A652C8C66D90082557A /* PhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE59A642C8C66D90082557A /* PhotosViewModel.swift */; };
+		1BE59A682C8C73880082557A /* ExtensionFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE59A672C8C73880082557A /* ExtensionFunctions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +50,11 @@
 		1BE59A472C8C4E640082557A /* Inspination iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Inspination iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE59A4B2C8C4E640082557A /* Inspination_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inspination_iOSUITests.swift; sourceTree = "<group>"; };
 		1BE59A4D2C8C4E640082557A /* Inspination_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inspination_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1BE59A5B2C8C4ED30082557A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		1BE59A5E2C8C60940082557A /* FetchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchController.swift; sourceTree = "<group>"; };
+		1BE59A612C8C61BA0082557A /* PhotosResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosResponse.swift; sourceTree = "<group>"; };
+		1BE59A642C8C66D90082557A /* PhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
+		1BE59A672C8C73880082557A /* ExtensionFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionFunctions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +105,11 @@
 		1BE59A2E2C8C4E5F0082557A /* Inspination iOS */ = {
 			isa = PBXGroup;
 			children = (
+				1BE59A662C8C737A0082557A /* Extension */,
+				1BE59A632C8C66C40082557A /* viewmodel */,
+				1BE59A602C8C619B0082557A /* data */,
+				1BE59A5D2C8C60800082557A /* network */,
+				1BE59A5A2C8C4EB10082557A /* Views */,
 				1BE59A2F2C8C4E5F0082557A /* Inspination_iOSApp.swift */,
 				1BE59A312C8C4E5F0082557A /* ContentView.swift */,
 				1BE59A332C8C4E640082557A /* Assets.xcassets */,
@@ -127,6 +142,46 @@
 				1BE59A4D2C8C4E640082557A /* Inspination_iOSUITestsLaunchTests.swift */,
 			);
 			path = "Inspination iOSUITests";
+			sourceTree = "<group>";
+		};
+		1BE59A5A2C8C4EB10082557A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1BE59A5B2C8C4ED30082557A /* HomeView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1BE59A5D2C8C60800082557A /* network */ = {
+			isa = PBXGroup;
+			children = (
+				1BE59A5E2C8C60940082557A /* FetchController.swift */,
+			);
+			path = network;
+			sourceTree = "<group>";
+		};
+		1BE59A602C8C619B0082557A /* data */ = {
+			isa = PBXGroup;
+			children = (
+				1BE59A612C8C61BA0082557A /* PhotosResponse.swift */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		1BE59A632C8C66C40082557A /* viewmodel */ = {
+			isa = PBXGroup;
+			children = (
+				1BE59A642C8C66D90082557A /* PhotosViewModel.swift */,
+			);
+			path = viewmodel;
+			sourceTree = "<group>";
+		};
+		1BE59A662C8C737A0082557A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				1BE59A672C8C73880082557A /* ExtensionFunctions.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +314,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BE59A5C2C8C4ED40082557A /* HomeView.swift in Sources */,
 				1BE59A322C8C4E5F0082557A /* ContentView.swift in Sources */,
+				1BE59A5F2C8C60940082557A /* FetchController.swift in Sources */,
+				1BE59A652C8C66D90082557A /* PhotosViewModel.swift in Sources */,
 				1BE59A302C8C4E5F0082557A /* Inspination_iOSApp.swift in Sources */,
+				1BE59A622C8C61BA0082557A /* PhotosResponse.swift in Sources */,
+				1BE59A682C8C73880082557A /* ExtensionFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

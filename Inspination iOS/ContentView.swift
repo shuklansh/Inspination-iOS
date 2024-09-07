@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var query = ""
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            HomeView(
+                queryText:$query
+            )
         }
-        .padding()
     }
 }
 
