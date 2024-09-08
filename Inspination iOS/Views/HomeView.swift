@@ -6,10 +6,17 @@
 //
 
 import SwiftUI
+import Photos
+import UIKit
 
 struct HomeView: View {
     @StateObject private var viewModel = PhotosViewModel(controller: FetchController()
     )
+    @StateObject private var downloader = Downloader()
+    
+    @State private var showSaveAlert = false
+        @State private var saveSuccess = false
+
     @Binding var queryText: String
     var body: some View {
         VStack {
@@ -19,46 +26,113 @@ struct HomeView: View {
                 .textFieldStyle(.roundedBorder)
                 .onChange(of: queryText,
                           {
-                    Task {
-                                await viewModel.fetchImagesForQuery(for: queryText)
-                                }
+                    if (queryText != "") {
+                        Task {
+                            await viewModel.fetchImagesForQuery(for: queryText)
+                        }
+                    }
                 })
+            Spacer()
             switch viewModel.status {
                 case .SUCCESS(let data):
-                    if (data.photos != nil) {
-                        ScrollView(.vertical, showsIndicators: false) {
-                            VStack {
-                                ForEach(data.photos, id:\.self) { imageLink in
-                                    AsyncImage(url:
-                                        imageLink.src.large, content: {
-                                        image in image
+                if data.photos.count > 0 {
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack {
+                            ForEach(data.photos, id: \.self) { imageLink in
+                                ZStack(alignment: .bottomLeading) {
+                                    AsyncImage(url: imageLink.src.large, content: { image in
+                                        image
                                             .resizable()
                                             .scaledToFill()
-                                    }, placeholder: { ProgressView() })
+                                    }, placeholder: {
+                                        ProgressView()
+                                    })
                                     .cornerRadius(24)
                                     .padding(.top, 60)
+                                    
+                                    ZStack {
+                                        Text("Download")
+                                            .padding(12)
+                                            .foregroundColor(.white)
+                                    }
+                                    .background(RoundedRectangle(cornerRadius: 12).foregroundColor(.black))
+                                    .onTapGesture {
+                                        Task {
+                                            saveImageToGallery(imageURLString: imageLink.src.large.absoluteString)
+                                        }
+                                    }
+                                    .alert(isPresented: $showSaveAlert) {
+                                        Alert(title: Text(saveSuccess ? "Success" : "Error"), message: Text(saveSuccess ? "Image saved to gallery." : "Failed to save image."), dismissButton: .default(Text("OK")))
+                                    }
+                                    .padding(14)
                                 }
                             }
                         }
-//                        AsyncImage(
-//                            url: URL(string: data.photos.first!.src.large)
-//                        )
-                    } else {
-                        Text("not found")
                     }
+                } else {
+                    Text("Not found")
+                }
                 case .FAILURE(let error):
-                Text("error : \(error.localizedDescription.description)")
+                    Text("not found")
+//                    print(error.localizedDescription.description)
                 default:
-                ZStack(alignment: .bottom) {
-                    ProgressView()
+                    ZStack(alignment: .bottom) {
+                        ProgressView()
+                    }
+            }
+
+        }.onAppear {
+            if (queryText != "") {
+                Task {
+                    await viewModel.fetchImagesForQuery(for: queryText)
                 }
             }
-        }.onAppear {
-            Task {
-                await viewModel.fetchImagesForQuery(for: queryText)
+        }
+        .background(
+                    LinearGradient(gradient: Gradient(colors: [.black, .purple]),
+                                   startPoint: .topLeading,
+                                   endPoint: .bottomTrailing)
+                )
+        
+    }
+    func saveImageToGallery(imageURLString: String) {
+            guard let url = URL(string: imageURLString) else {
+                showSaveAlert = true
+                saveSuccess = false
+                return
+            }
+            
+            // Request permission if needed
+            PHPhotoLibrary.requestAuthorization { status in
+                if status == .authorized {
+                    // Download the image
+                    URLSession.shared.dataTask(with: url) { data, response, error in
+                        guard let data = data, error == nil, let image = UIImage(data: data) else {
+                            DispatchQueue.main.async {
+                                showSaveAlert = true
+                                saveSuccess = false
+                            }
+                            return
+                        }
+                        
+                        // Save the image to the photo library
+                        PHPhotoLibrary.shared().performChanges({
+                            PHAssetChangeRequest.creationRequestForAsset(from: image)
+                        }) { success, error in
+                            DispatchQueue.main.async {
+                                showSaveAlert = true
+                                saveSuccess = success
+                            }
+                        }
+                    }.resume()
+                } else {
+                    DispatchQueue.main.async {
+                        showSaveAlert = true
+                        saveSuccess = false
+                    }
+                }
             }
         }
-    }
 }
 
 //#Preview {

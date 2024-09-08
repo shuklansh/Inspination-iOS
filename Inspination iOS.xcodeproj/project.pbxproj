@@ -55,6 +55,7 @@
 		1BE59A612C8C61BA0082557A /* PhotosResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosResponse.swift; sourceTree = "<group>"; };
 		1BE59A642C8C66D90082557A /* PhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
 		1BE59A672C8C73880082557A /* ExtensionFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionFunctions.swift; sourceTree = "<group>"; };
+		1BE59A692C8DD97F0082557A /* Inspination-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Inspination-iOS-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +106,7 @@
 		1BE59A2E2C8C4E5F0082557A /* Inspination iOS */ = {
 			isa = PBXGroup;
 			children = (
+				1BE59A692C8DD97F0082557A /* Inspination-iOS-Info.plist */,
 				1BE59A662C8C737A0082557A /* Extension */,
 				1BE59A632C8C66C40082557A /* viewmodel */,
 				1BE59A602C8C619B0082557A /* data */,
@@ -482,6 +484,11 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Inspination iOS/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Inspination-iOS-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "We need access to your photo library to save images.";
+				INFOPLIST_KEY_NSDownloadsFolderUsageDescription = "We need access to your photo library to save images.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need access to your photo library to save images.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to save images.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -518,6 +525,11 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Inspination iOS/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Inspination-iOS-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "We need access to your photo library to save images.";
+				INFOPLIST_KEY_NSDownloadsFolderUsageDescription = "We need access to your photo library to save images.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need access to your photo library to save images.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to save images.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
