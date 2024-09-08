@@ -24,7 +24,7 @@ struct HomeView: View {
                 .padding(.vertical, 14)
                 .padding(.horizontal, 4)
                 .frame(alignment: .leading)
-            TextField("query", text: $queryText)
+            TextField("what are you searching for?", text: $queryText)
                 .keyboardType(.alphabet)
                 .foregroundStyle(.black)
                 .textFieldStyle(.roundedBorder)
@@ -93,6 +93,10 @@ struct HomeView: View {
                 } else {
                     Text("Not found")
                 }
+            case .NOT_INITIATED:
+                Text("Find your inspiration")
+                    .foregroundColor(.white)
+                    .padding()
                 case .FAILURE(let error):
                     Text("not found")
 //                    print(error.localizedDescription.description)
