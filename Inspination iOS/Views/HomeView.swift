@@ -26,12 +26,12 @@ struct HomeView: View {
                 .frame(alignment: .leading)
             TextField("what are you searching for?", text: $queryText)
                 .keyboardType(.alphabet)
-                .foregroundStyle(.black)
+                .foregroundStyle(.white.opacity(0.75))
                 .padding(.vertical, 20)
                 .padding(.horizontal, 8)
                 .background(
                     RoundedRectangle(cornerRadius: 20) // Set corner radius to 20
-                        .fill(Color.gray.opacity(0.2)) // Background color
+                        .fill(Color.purple.opacity(0.2)) // Background color
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
