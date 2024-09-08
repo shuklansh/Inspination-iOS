@@ -27,9 +27,16 @@ struct HomeView: View {
             TextField("what are you searching for?", text: $queryText)
                 .keyboardType(.alphabet)
                 .foregroundStyle(.black)
-                .textFieldStyle(.roundedBorder)
                 .padding(.vertical, 20)
                 .padding(.horizontal, 8)
+                .background(
+                    RoundedRectangle(cornerRadius: 20) // Set corner radius to 20
+                        .fill(Color.gray.opacity(0.2)) // Background color
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.gray, lineWidth: 1) // Optional border
+                )
                 .onChange(of: queryText,
                           {
                     
@@ -78,7 +85,10 @@ struct HomeView: View {
                                         )
                                         .onTapGesture {
                                             Task {
-                                                saveImageToGallery(imageURLString: imageLink.src.large.absoluteString)
+                                        saveImageToGallery(imageURLString: imageLink.src.large.absoluteString) { success in
+                                                    self.saveSuccess = success
+                                                    self.showSaveAlert = true
+                                                }
                                             }
                                         }
                                         .alert(isPresented: $showSaveAlert) {
@@ -120,48 +130,4 @@ struct HomeView: View {
                 )
         
     }
-    func saveImageToGallery(imageURLString: String) {
-            guard let url = URL(string: imageURLString) else {
-                showSaveAlert = true
-                saveSuccess = false
-                return
-            }
-            
-            // Request permission if needed
-            PHPhotoLibrary.requestAuthorization { status in
-                if status == .authorized {
-                    // Download the image
-                    URLSession.shared.dataTask(with: url) { data, response, error in
-                        guard let data = data, error == nil, let image = UIImage(data: data) else {
-                            DispatchQueue.main.async {
-                                showSaveAlert = true
-                                saveSuccess = false
-                            }
-                            return
-                        }
-                        
-                        // Save the image to the photo library
-                        PHPhotoLibrary.shared().performChanges({
-                            PHAssetChangeRequest.creationRequestForAsset(from: image)
-                        }) { success, error in
-                            DispatchQueue.main.async {
-                                showSaveAlert = true
-                                saveSuccess = success
-                            }
-                        }
-                    }.resume()
-                } else {
-                    DispatchQueue.main.async {
-                        showSaveAlert = true
-                        saveSuccess = false
-                    }
-                }
-            }
-        }
 }
-
-//#Preview {
-//    HomeView(
-//        ""
-//    )
-//}

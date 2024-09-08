@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Photos
+import UIKit
 
 extension String {
     var replaceSpaceWithPlus: String {
@@ -19,9 +21,47 @@ extension String {
     }
 }
 
+typealias SaveImageCompletion = (Bool) -> Void
+
+func saveImageToGallery(
+    imageURLString: String,
+    onCompletion: @escaping SaveImageCompletion
+) {
+    guard let url = URL(string: imageURLString) else {
+        DispatchQueue.main.async {
+            onCompletion(false)
+        }
+        return
+    }
+    
+    PHPhotoLibrary.requestAuthorization { status in
+        if status == .authorized {
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                guard let data = data, error == nil, let image = UIImage(data: data) else {
+                    DispatchQueue.main.async {
+                        onCompletion(false)
+                    }
+                    return
+                }
+                
+                PHPhotoLibrary.shared().performChanges({
+                    PHAssetChangeRequest.creationRequestForAsset(from: image)
+                }) { success, error in
+                    DispatchQueue.main.async {
+                        onCompletion(success)
+                    }
+                }
+            }.resume()
+        } else {
+            DispatchQueue.main.async {
+                onCompletion(false)
+            }
+        }
+    }
+}
+
 class Downloader : ObservableObject {
     func downloadImage(imageUrlStr: String) {
-        imageUrlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
               let task = URLSession.shared.dataTask(with: URLRequest(url: URL(string: imageUrlStr)!), completionHandler: {(data, response, error) -> Void in
                 
                   guard let data = data else {
