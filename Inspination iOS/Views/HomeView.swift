@@ -10,22 +10,29 @@ import Photos
 import UIKit
 
 struct HomeView: View {
-    @StateObject private var viewModel = PhotosViewModel(controller: FetchController()
-    )
-    @StateObject private var downloader = Downloader()
-    
+    @StateObject private var viewModel = PhotosViewModel(controller: FetchController())
     @State private var showSaveAlert = false
-        @State private var saveSuccess = false
+    @State private var saveSuccess = false
+    @State private var imageLoaded = false
 
     @Binding var queryText: String
     var body: some View {
         VStack {
+            Text("InspiNation")
+                .foregroundColor(.white)
+                .bold()
+                .padding(.vertical, 14)
+                .padding(.horizontal, 4)
+                .frame(alignment: .leading)
             TextField("query", text: $queryText)
-                .keyboardType(.numberPad)
+                .keyboardType(.alphabet)
                 .foregroundStyle(.black)
                 .textFieldStyle(.roundedBorder)
+                .padding(.vertical, 20)
+                .padding(.horizontal, 8)
                 .onChange(of: queryText,
                           {
+                    
                     if (queryText != "") {
                         Task {
                             await viewModel.fetchImagesForQuery(for: queryText)
@@ -44,30 +51,44 @@ struct HomeView: View {
                                         image
                                             .resizable()
                                             .scaledToFill()
+                                            .onAppear {
+                                                imageLoaded = true // Set flag when image appears
+                                            }
                                     }, placeholder: {
-                                        ProgressView()
+                                        ZStack(alignment: .center) {
+                                            ProgressView()
+                                        }.frame(width: 120,height: 120)
                                     })
                                     .cornerRadius(24)
-                                    .padding(.top, 60)
-                                    
-                                    ZStack {
-                                        Text("Download")
-                                            .padding(12)
-                                            .foregroundColor(.white)
-                                    }
-                                    .background(RoundedRectangle(cornerRadius: 12).foregroundColor(.black))
-                                    .onTapGesture {
-                                        Task {
-                                            saveImageToGallery(imageURLString: imageLink.src.large.absoluteString)
+                                    if (imageLoaded) {
+                                        ZStack {
+                                            Text("Download")
+                                                .padding(12)
+                                                .foregroundColor(.white)
                                         }
+                                        .background(
+                                            LinearGradient(
+                                                gradient: Gradient(colors: [.black.opacity(0.91), .purple.opacity(0.91)]),
+                                                startPoint: .leading,
+                                                endPoint: .trailing
+                                            )
+                                            .mask(
+                                                RoundedRectangle(cornerRadius: 12) // Apply gradient to RoundedRectangle
+                                            )
+                                        )
+                                        .onTapGesture {
+                                            Task {
+                                                saveImageToGallery(imageURLString: imageLink.src.large.absoluteString)
+                                            }
+                                        }
+                                        .alert(isPresented: $showSaveAlert) {
+                                            Alert(title: Text(saveSuccess ? "Success" : "Error"), message: Text(saveSuccess ? "Image saved to gallery." : "Failed to save image."), dismissButton: .default(Text("OK")))
+                                        }
+                                        .padding(14)
                                     }
-                                    .alert(isPresented: $showSaveAlert) {
-                                        Alert(title: Text(saveSuccess ? "Success" : "Error"), message: Text(saveSuccess ? "Image saved to gallery." : "Failed to save image."), dismissButton: .default(Text("OK")))
-                                    }
-                                    .padding(14)
                                 }
                             }
-                        }
+                        }.padding(8)
                     }
                 } else {
                     Text("Not found")
@@ -78,7 +99,7 @@ struct HomeView: View {
                 default:
                     ZStack(alignment: .bottom) {
                         ProgressView()
-                    }
+                    }.frame(width: 120,height: 120)
             }
 
         }.onAppear {
