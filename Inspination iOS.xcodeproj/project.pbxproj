@@ -19,6 +19,9 @@
 		1BE59A622C8C61BA0082557A /* PhotosResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE59A612C8C61BA0082557A /* PhotosResponse.swift */; };
 		1BE59A652C8C66D90082557A /* PhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE59A642C8C66D90082557A /* PhotosViewModel.swift */; };
 		1BE59A682C8C73880082557A /* ExtensionFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE59A672C8C73880082557A /* ExtensionFunctions.swift */; };
+		1BE59A6B2C97458E0082557A /* DetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE59A6A2C97458E0082557A /* DetailedView.swift */; };
+		1BE59A6D2C9748CD0082557A /* CustomWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE59A6C2C9748CD0082557A /* CustomWebView.swift */; };
+		1BE59A6F2C974AF00082557A /* PhotographerPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE59A6E2C974AF00082557A /* PhotographerPageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +59,9 @@
 		1BE59A642C8C66D90082557A /* PhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
 		1BE59A672C8C73880082557A /* ExtensionFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionFunctions.swift; sourceTree = "<group>"; };
 		1BE59A692C8DD97F0082557A /* Inspination-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Inspination-iOS-Info.plist"; sourceTree = SOURCE_ROOT; };
+		1BE59A6A2C97458E0082557A /* DetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedView.swift; sourceTree = "<group>"; };
+		1BE59A6C2C9748CD0082557A /* CustomWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWebView.swift; sourceTree = "<group>"; };
+		1BE59A6E2C974AF00082557A /* PhotographerPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotographerPageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +156,9 @@
 			isa = PBXGroup;
 			children = (
 				1BE59A5B2C8C4ED30082557A /* HomeView.swift */,
+				1BE59A6A2C97458E0082557A /* DetailedView.swift */,
+				1BE59A6C2C9748CD0082557A /* CustomWebView.swift */,
+				1BE59A6E2C974AF00082557A /* PhotographerPageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -316,13 +325,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BE59A6F2C974AF00082557A /* PhotographerPageView.swift in Sources */,
 				1BE59A5C2C8C4ED40082557A /* HomeView.swift in Sources */,
 				1BE59A322C8C4E5F0082557A /* ContentView.swift in Sources */,
 				1BE59A5F2C8C60940082557A /* FetchController.swift in Sources */,
 				1BE59A652C8C66D90082557A /* PhotosViewModel.swift in Sources */,
+				1BE59A6B2C97458E0082557A /* DetailedView.swift in Sources */,
 				1BE59A302C8C4E5F0082557A /* Inspination_iOSApp.swift in Sources */,
 				1BE59A622C8C61BA0082557A /* PhotosResponse.swift in Sources */,
 				1BE59A682C8C73880082557A /* ExtensionFunctions.swift in Sources */,
+				1BE59A6D2C9748CD0082557A /* CustomWebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

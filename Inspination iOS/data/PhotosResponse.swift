@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PhotosResponse: Decodable {
+struct PhotosResponse: Decodable, Hashable {
     let next_page: String
     let page: Int
     let per_page: Int
